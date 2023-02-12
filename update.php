@@ -20,25 +20,26 @@
 
     $data = $stmnt->fetch(PDO::FETCH_OBJ);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $sql = "UPDATE pizza SET 
-                bodem=:bdm, 
-                saus=:ss, 
-                topping=:tpn,
-                kruiden=:krd 
+        $sql = "UPDATE achtbaan SET 
+                naamAchtbaan=:acbn,
+                naamPretpark=:ptpk,
+                land=:lnd,
+                topsnelheid=:tpsnl,
+                hoogte=:hgt,
+                datum=:dtm,
+                cijfer=:cfr
                 WHERE id=:id";
         $stmnt = $pdo->prepare($sql);
 
-        $stmnt->bindValue(":id", $_POST["id"]);
-        $stmnt->bindValue(":bdm", $_POST["bodem"], PDO::PARAM_STR);
-        $stmnt->bindValue(":ss", $_POST["saus"], PDO::PARAM_STR);
-        $stmnt->bindValue(":tpn", $_POST["topping"], PDO::PARAM_STR);
-        $kruiden = $_POST["kruiden"];
+        $stmnt->bindValue(":id",  $_POST["id"]);
 
-        $kruidOutput = "";
-        foreach ($_POST["kruiden"] as $value) {
-            $kruidOutput .= $value . ",";
-        }
-        $stmnt->bindValue(":krd", $kruidOutput, PDO::PARAM_STR);
+        $stmnt->bindValue(":acbn", $_POST["achtbaan"], PDO::PARAM_STR);
+        $stmnt->bindValue(":ptpk", $_POST["pretpark"], PDO::PARAM_STR);
+        $stmnt->bindValue(":lnd",  $_POST["land"], PDO::PARAM_STR);
+        $stmnt->bindValue(":tpsnl", $_POST["topsnelheid"], PDO::PARAM_INT);
+        $stmnt->bindValue(":hgt",  $_POST["hoogte"], PDO::PARAM_INT);
+        $stmnt->bindValue(":dtm",  $_POST["datum"], PDO::PARAM_STR);
+        $stmnt->bindValue(":cfr",  $_POST["cijfer"], PDO::PARAM_STR);
 
         $stmnt->execute();
         header("Location: index.php");
@@ -47,24 +48,26 @@
     <h1>Update je pizza</h1>
     <form action="" method="post">
         <h4>Naam Achtbaan:</h4>
-        <input type="text" name="achtbaan">
+        <input type="text" name="achtbaan" value="<?=$data->naamAchtbaan?>">
         <h4>Naam Pretpark:</h4>
-        <input type="text" name="pretpark">
+        <input type="text" name="pretpark" value="<?=$data->naamPretpark?>">
         <h4>Naam Land:</h4>
-        <input type="text" name="land">
+        <input type="text" name="land" value="<?=$data->land?>">
         <h4>Topsnelheid (km/u):</h4>
-        <input type="number" name="topsnelheid" min="1" max="200">
+        <input type="number" name="topsnelheid" min="1" max="200" value="<?=$data->topsnelheid?>">
         <h4>Hoogte (m):</h4>
-        <input type="number" name="hoogte" min="1" max="200" >
+        <input type="number" name="hoogte" min="1" max="200" value="<?=$data->hoogte?>">
         <h4>Datum eerste opening:</h4>
-        <input type="date" name="datum">
+        <input type="date" name="datum" value="<?=$data->datum?>">
         <h4>Cijfer voor achtbaan: </h4>
         <div class="flex">
-            <input type="range" name="cijfer" min="0" max="10" step="0.1" value="5">
+            <input type="range" name="cijfer" min="0" max="10" step="0.1" value="<?=$data->cijfer?>">
             <span id="rangeOutput">5.0</span>
         </div>
+        <input type="hidden" name="id" value="<?=$_GET["id"]?>">
         <button type="submit">Update atractie</button>
     </form>
+    <script src="script.js"></script>
 </body>
 
 </html>
