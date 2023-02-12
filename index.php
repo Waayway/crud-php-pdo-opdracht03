@@ -24,7 +24,7 @@
             $stmnt->bindValue(":tpsnl", $_POST["topsnelheid"], PDO::PARAM_INT);
             $stmnt->bindValue(":hgt",  $_POST["hoogte"], PDO::PARAM_INT);
             $stmnt->bindValue(":dtm",  $_POST["datum"], PDO::PARAM_STR);
-            $stmnt->bindValue(":cfr",  $_POST["cijfer"], PDO::PARAM_INT);
+            $stmnt->bindValue(":cfr",  $_POST["cijfer"], PDO::PARAM_STR);
 
             $stmnt->execute();
             header("Refresh: 0");
