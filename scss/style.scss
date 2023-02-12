@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    form {
+        width: 50%;
+        input:not([type="radio"]):not([type="checkbox"]), select {
+            width: 100%;
+            padding: .3rem;
+        }
+        button {
+            width: 100%;
+            color: white;
+            background-color: #6161d5;
+            font-weight: bold;
+            padding: 1rem;
+            font-size: 1.4rem;
+            border: none;
+            border-radius: 1rem;
+            margin-top: 1rem;
+        }
+        h3 {
+            font-weight: normal;
+        }
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
